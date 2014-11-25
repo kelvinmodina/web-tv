@@ -1,0 +1,198 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<style>
+			body{
+				padding: 0px;
+				margin: 0px;
+				background: #e5e5e5;
+			}
+			
+			ul{
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+			video{
+				
+			}
+		</style>
+		<style>
+			#container{
+				width:100%;
+				height:100%;
+				/*max-width: 1000px;*/
+				margin:0px auto;
+				background:#3498db;
+			}
+			
+			#window{
+				width:100%;
+				height:100%;
+			}
+			
+			#channels-window{
+				width:100%;
+				height:25%;
+				overflow-x:auto;
+				background:#2980b9;
+			}
+				#channels-window ul li{
+					height:100%;
+					width: 150px;
+					float:left;
+				}
+				
+				#channels-window img{
+					width:100px;
+					height:100px;
+				}
+			
+			.channels div{
+				margin:5px;
+				width: 110px;
+				height: 130px;
+				background:#2c3e50;
+				text-align:center;
+			}
+			
+			.channels div img{
+				margin-top:15%;
+			}
+		</style>
+		
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/jquery-ui/jquery-ui.js"></script>
+		<script src="http://jwpsrv.com/library/O4mPlqeTEeK_viIACpYGxA.js"></script>
+		<script>
+			$(function(){
+				$("#channels-window ul").css({
+					width: $(".channels").width() * $(".channels").length
+				});
+				
+				jwplayer('player').setup({ 
+					file: "http://iwantvls-i.akamaihd.net/hls/live/202810/abscbn/master.m3u8",
+					width: "100%",
+					height: "100%"
+				}).onSetupError(function(){
+					$("#player").html(convertToHTML($(".channels").first().find("div img").data("url")));
+				});
+				
+				
+				$("#channels-window img").click(function(){
+					jwplayer('player').setup({ 
+						file: $(this).data("url"),
+						width: "100%",
+						height: "100%",
+						'autostart': 'true'
+					}).onSetupError(function(){
+						$("#player").html(convertToHTML($(this).data("url")));
+					});
+					var vid = $("#video");
+					vid.autoplay = true;
+				});
+			});
+			
+			function convertToHTML(_src){
+				var vid = $("<video>");
+				var source = $("<source>");
+				
+				vid.attr({
+					"width": "100%",
+					"height": "100%",
+					"controls":true,
+					"autoplay":true,
+					"id": "video"
+				});
+				
+				vid.autoplay = true;
+				
+				source.attr({
+					"src": _src,
+					"type":"application/x-mpegURL"
+				});
+				
+				vid.html(source);
+				
+				return vid;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="window">
+				<div id="player"></div>
+			</div>
+			<div id="channels-window">
+				<ul>
+					<li class="channels">
+						<div>
+							<img src="app_img/abs_cbn.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/202810/abscbn/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/anc.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/202945/anc/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/cnn.png" data-url="http://iwantvls-i.akamaihd.net/hls/live/202948/cnn/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/dzmm.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/202944/dzmmtele/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/history.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/217070/history/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/national_geographic.png" data-url="http://iwantvls-i.akamaihd.net/hls/live/202947/natgeo/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/warner.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/217067/warner/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/jack.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/205427/jacktv/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/afc.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/217071/afc/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/cartoon_network.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/215573/cartoonnetwork/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/nick.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/215584/nick/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/basket.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/202946/btv/master.m3u8">
+						</div>
+					</li>
+					<li class="channels">
+						<div>
+							<img src="app_img/solar_sports.jpg" data-url="http://iwantvls-i.akamaihd.net/hls/live/205841/solarsports/master.m3u8">
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
